@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:radial-gradient(circle at bottom,#02111b,#000814 80%);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* 🌟 Bintang */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.3;}
+    to{opacity:1;}
+}
+
+/* 💌 Envelope Button */
+.envelope-btn{
+    width:180px;
+    height:120px;
+    background:#ffb3c6;
+    position:relative;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:0 15px 40px rgba(0,0,0,0.6);
+    transition:0.3s;
+}
+
+.envelope-btn:hover{
+    transform:scale(1.05);
+}
+
+.envelope-btn::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff8fab;
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+}
+
+/* 💖 Popup */
+.popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    width:350px;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 25px 60px rgba(0,0,0,0.7);
+    transition:0.5s ease;
+    z-index:10;
+}
+
+.popup.active{
+    transform:translate(-50%,-50%) scale(1);
+}
+
+.popup h2{
+    color:#e63946;
+    margin-bottom:15px;
+}
+
+.popup p{
+    color:#444;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.close-btn{
+    margin-top:20px;
+    padding:8px 20px;
+    border:none;
+    background:#ff4d6d;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.close-btn:hover{
+    background:#e63946;
+}
+
+/* 🌹 Flower Animation */
+.flower{
+    position:absolute;
+    bottom:-50px;
+    font-size:30px;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-110vh);opacity:0;}
+}
+
+/* ❤️ Heart Animation */
+.heart{
+    position:absolute;
+    color:#ff4d6d;
+    font-size:20px;
+    animation: rise 6s linear infinite;
+}
+
+@keyframes rise{
+    from{transform:translateY(100vh) scale(0.5);opacity:1;}
+    to{transform:translateY(-10vh) scale(1.5);opacity:0;}
+}
+
+/* 🌫 Overlay Blur */
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    backdrop-filter:blur(5px);
+    background:rgba(0,0,0,0.3);
+    opacity:0;
+    pointer-events:none;
+    transition:0.5s;
+}
+
+.overlay.active{
+    opacity:1;
+    pointer-events:all;
+}
+
+</style>
+</head>
+<body>
+
+<div class="envelope-btn" onclick="openPopup()"></div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="popup" id="popup">
+    <h2>Happy Valentine's Day ❤️</h2>
+    <p>
+        HALLOOO SAYAANGGGGG 🌹<br><br>
+       aku pengen aja sihh buat gini soalnya khusus buat kamuu hehehehe.<br>
+       semogaa sukaa yaaa aku yaa sayaangggggg lop uu 💕
+    </p>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<script>
+
+/* 🌟 Generate Stars */
+for(let i=0;i<120;i++){
+    let star=document.createElement("div");
+    star.className="star";
+    star.style.top=Math.random()*100+"vh";
+    star.style.left=Math.random()*100+"vw";
+    star.style.animationDuration=(Math.random()*3+1)+"s";
+    document.body.appendChild(star);
+}
+
+/* 🌹 Flowers */
+function createFlower(){
+    let flower=document.createElement("div");
+    flower.className="flower";
+    flower.innerHTML="🌸";
+    flower.style.left=Math.random()*100+"vw";
+    flower.style.animationDuration=(Math.random()*5+5)+"s";
+    document.body.appendChild(flower);
+    setTimeout(()=>flower.remove(),10000);
+}
+setInterval(createFlower,900);
+
+/* ❤️ Hearts */
+function createHeart(){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,1200);
+
+/* 💌 Popup */
+function openPopup(){
+    document.getElementById("popup").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
+}
+
+function closePopup(){
+    document.getElementById("popup").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+}
+
+</script>
+
+</body>
+</html>
